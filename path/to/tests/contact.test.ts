@@ -7,7 +7,27 @@ test.describe('Contact Creation Process', () => {
   test.beforeEach(async ({ page }) => {
     contactPage = new ContactPage(page);
     await page.goto('https://example.com/login');
+    });
+
+  test('should create a new contact with invalid email', async ({ page }) => {
+    await contactPage.enterEmailField('ramakrishnatest@yopmail.com');
+    await contactPage.enterPasswordField('Ramakrishna#456');
+    await contactPage.clickLoginButton();
+    await contactPage.clickContactsLink();
+    await contactPage.clickCreateLink();
+    await contactPage.enterFirstNameField('John');
+    await contactPage.selectCompanyCombobox();
+    await contactPage.enterLastNameField('TestCompany');
+    await contactPage.enterNumberField('3105551234');
+    await contactPage.enterMiddleNameField('Manager');
+    await contactPage.enterStreetAddressField('invalidemail.com');
+    await contactPage.clickSaveButton();
+
+    // Add assertions to verify the error message for invalid email
+    const errorMessage = await page.locator('text=Invalid email address');
+    await expect(errorMessage).toBeVisible();
   });
+});
 
   test('should login and create a new contact', async ({ page }) => {
     await contactPage.enterEmailField('ramakrishnatest@yopmail.com');

@@ -96,8 +96,70 @@ export class ContactPage {
   }
 
   /**
+   * Fill the 'Number' field.
+   * @param number - The number to enter.
+   */
+  async enterNumberField(number: string): Promise<void> {
+    this.logStep(`Enter number: ${number}`);
+    const numberField = this.page.getByRole('textbox', { name: 'Number' });
+    await numberField.waitFor({ state: 'visible' });
+    await numberField.fill(number);
+  }
+
+  /**
+   * Fill the 'Middle Name' field.
+   * @param middleName - The middle name to enter.
+   */
+  async enterMiddleNameField(middleName: string): Promise<void> {
+    this.logStep(`Enter middle name: ${middleName}`);
+    const middleNameField = this.page.locator('input[name="middle_name"]');
+    await middleNameField.waitFor({ state: 'visible' });
+    await middleNameField.fill(middleName);
+  }
+
+  /**
+   * Fill the 'Street Address' field.
+   * @param streetAddress - The street address to enter.
+   */
+  async enterStreetAddressField(streetAddress: string): Promise<void> {
+    this.logStep(`Enter street address: ${streetAddress}`);
+    const streetAddressField = this.page.getByRole('textbox', { name: 'Street Address' });
+    await streetAddressField.waitFor({ state: 'visible' });
+    await streetAddressField.fill(streetAddress);
+  }
+
+  /**
+   * Click the 'Save' button.
+   */
+  async clickSaveButton(): Promise<void> {
+    this.logStep('Click Save button');
+    const saveButton = this.page.getByRole('button', { name: 'Save' });
+    await saveButton.waitFor({ state: 'visible' });
+    await saveButton.click();
+  }
+
+  /**
+   * Select the 'Company' combobox.
+   */
+  async selectCompanyCombobox(): Promise<void> {
+    this.logStep('Select Company combobox');
+    const companyCombobox = this.page.getByRole('combobox').first();
+    await companyCombobox.waitFor({ state: 'visible' });
+    await companyCombobox.click();
+  }
+
+  /**
    * Fill the 'Email Address' field.
    * @param emailAddress - The email address to enter.
+   */
+  async enterEmailAddressField(emailAddress: string): Promise<void> {
+    this.logStep(`Enter email address: ${emailAddress}`);
+    const emailAddressField = this.page.getByRole('textbox', { name: 'Email Address' });
+    await emailAddressField.waitFor({ state: 'visible' });
+    await emailAddressField.fill(emailAddress);
+  }
+
+  /**
    */
   async enterEmailAddressField(emailAddress: string): Promise<void> {
     this.logStep(`Enter email address: ${emailAddress}`);
